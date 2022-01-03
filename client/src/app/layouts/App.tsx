@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Catalog from "../../features/Catalog";
+import IProduct from "../models/product";
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   useEffect(() => {
     fetch("http://localhost:5000/api/products")
       .then((response) => response.json())
@@ -10,13 +12,7 @@ function App() {
   return (
     <div className="App">
       <h1>BigStore</h1>
-
-      <ul>
-        {products &&
-          products.map((item, index) => (
-            <li key={index}>{item?.productName} </li>
-          ))}
-      </ul>
+      <Catalog products={products} />
     </div>
   );
 }
