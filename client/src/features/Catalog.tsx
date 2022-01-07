@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Grid } from '@mui/material';
 import IProduct from '../app/models/product'
-interface Props {
-    products: IProduct[];
-}
-const Catalog: React.FC<Props> = ({ products }) => {
+import ProductCard from './ProductCard';
+const Catalog = () => {
+    const [products, setProducts] = useState<IProduct[]>([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/api/products")
+            .then((response) => response.json())
+            .then((data) => setProducts(data));
+    }, []);
     return (
-        <>
-            <ul>
-                {products &&
-                    products.map((item, index) => (
-                        <li key={index}>{item?.productName} </li>
-                    ))}
-            </ul>
-        </>
+        <Grid container spacing={2} mt={3}>
+            {products && products.map((item, index) =>
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                    <ProductCard productItem={item} />
+                </Grid>)}
+        </Grid>
     )
 }
 

@@ -1,5 +1,6 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@font-face{
+    font-family: "Bvazir";
+    font-weight: normal;
+    font-style: normal;
+    src: url('../../fonts/Vazir-Medium-FD-WOL.woff') format('woff');
 }
