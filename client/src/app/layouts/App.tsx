@@ -1,8 +1,6 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import Catalog from "../../features/Catalog";
-import IProduct from "../models/product";
-import theme, { themeMode } from '../theme/theme'
+import React, { useState } from "react";
+import theme from '../theme/theme'
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@mui/styles';
@@ -10,6 +8,12 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import Header from "./Header";
+import { Route, Routes } from "react-router-dom";
+import Home from "../../features/Home/Home";
+import ContactPage from "../../features/ContactPage/ContactPage";
+import AboutPage from "../../features/AboutPage/AboutPage";
+import Catalog from "../../features/Products/Catalog";
+
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -42,12 +46,17 @@ function App() {
           <div className="App">
             <Header darkMode={darkMode} changeDarkMode={changeDarkMode} />
             <Container>
-              <Catalog />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Catalog />} />
+                <Route path="/contactus" element={<ContactPage />} />
+                <Route path="/aboutus" element={<AboutPage />} />
+              </Routes>
             </Container>
           </div>
         </StylesProvider>
       </CacheProvider>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 

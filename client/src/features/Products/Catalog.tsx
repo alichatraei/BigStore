@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material';
-import IProduct from '../app/models/product'
+import IProduct from '../../app/models/product';
 import ProductCard from './ProductCard';
 const Catalog = () => {
     const [products, setProducts] = useState<IProduct[]>([]);

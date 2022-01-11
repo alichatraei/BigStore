@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
-import IProduct from '../app/models/product'
+import IProduct from '../../app/models/product'
 interface IProps {
     productItem: IProduct
 }
