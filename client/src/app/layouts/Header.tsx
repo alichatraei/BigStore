@@ -1,28 +1,36 @@
 import React from 'react'
 import { AppBar, Badge, Grid, IconButton, List, ListItem, Switch, Toolbar, Typography } from '@mui/material'
-import { Box } from '@mui/system'
 import { midLinks, rightLinks } from '../models/navLinks';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { ShoppingCart } from '@mui/icons-material';
+
 interface IProps {
     darkMode: boolean;
     changeDarkMode: () => void;
 }
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     list: {
         display: "flex",
         alignItems: 'center',
         width: "100%"
     },
     listItem: {
-        color: 'inherit',
+        color: 'inherit'
     },
     iconButton: {
         color: "inherit"
     }
-}
+})
 )
+const styles = {
+    "&:hover": {
+        color: "grey.500",
+    },
+    "&.active": {
+        color: "grey.400"
+    }
+}
 const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
     const classes = useStyles()
     return (
@@ -30,7 +38,11 @@ const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
             <Toolbar>
                 <Grid container>
                     <Grid item xs={4} md={1} display={"flex"} alignItems={"center"}>
-                        <Typography component={NavLink} to={"/"} sx={{ color: "inherit", textDecoration: "none" }}>
+                        <Typography component={NavLink} to={"/"} sx={{
+                            color: "inherit", textDecoration: "none", "&.active": {
+                                color: 'error.light'
+                            }
+                        }}>
                             بیگ استور
                         </Typography>
                         <Switch checked={darkMode} onChange={changeDarkMode} />
@@ -41,7 +53,8 @@ const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
                                 <ListItem key={index} component={NavLink}
                                     to={path}
                                     className={classes.listItem}
-                                    sx={{ width: 'auto' }}
+                                    sx={{ width: 'auto', ...styles }}
+
                                 >
                                     {title}
                                 </ListItem>))}
@@ -58,7 +71,7 @@ const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
                                 <ListItem key={index} component={NavLink}
                                     to={path}
                                     className={classes.listItem}
-                                    sx={{ width: 'auto' }}
+                                    sx={{ width: 'auto', ...styles }}
                                 >
                                     {title}
                                 </ListItem>))}
