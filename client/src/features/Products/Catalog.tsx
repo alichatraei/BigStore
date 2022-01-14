@@ -10,7 +10,7 @@ const Catalog = () => {
             .then((data) => setProducts(data));
     }, []);
     return (
-        <Grid container spacing={2} mt={3}>
+        <Grid container spacing={2} my={3}>
             {products && products.map((item, index) =>
                 <Grid item xs={12} sm={6} md={4} key={index}>
                     <ProductCard productItem={item} />

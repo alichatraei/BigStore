@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import IProduct from '../../app/models/product'
+import { Link } from 'react-router-dom'
 interface IProps {
     productItem: IProduct
 }
 const ProductCard = ({ productItem }: IProps) => {
     return (
-        <Card>
+        <Card sx={{ height: "100%", display: 'flex', flexDirection: 'column', justifyContent: "space-between" }}>
             <CardMedia
                 component="img"
                 // height="200"
@@ -22,7 +23,7 @@ const ProductCard = ({ productItem }: IProps) => {
             </CardContent>
             <CardActions dir='ltr'>
                 <Button size="small">اضافه کردن به سبد خرید</Button>
-                <Button size="small">مشاهده محصول</Button>
+                <Button component={Link} to={`/product/${productItem.id}`} size="small">مشاهده محصول</Button>
             </CardActions>
         </Card>
     )

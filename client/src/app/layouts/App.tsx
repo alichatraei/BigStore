@@ -13,6 +13,7 @@ import Home from "../../features/Home/Home";
 import ContactPage from "../../features/ContactPage/ContactPage";
 import AboutPage from "../../features/AboutPage/AboutPage";
 import Catalog from "../../features/Products/Catalog";
+import ProductDetail from "../../features/ProductDetail/ProductDetail";
 
 
 // Create rtl cache
@@ -47,8 +48,9 @@ function App() {
             <Header darkMode={darkMode} changeDarkMode={changeDarkMode} />
             <Container>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/products" element={<Catalog />} />
+                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/" element={<Catalog />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/contactus" element={<ContactPage />} />
                 <Route path="/aboutus" element={<AboutPage />} />
               </Routes>
