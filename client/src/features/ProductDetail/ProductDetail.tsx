@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
 import IProduct from '../../app/models/product'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import agent from '../../app/api/agent'
 
 const ProductDetail = () => {
     const { id } = useParams<{ id: string }>()
     const [product, setProduct] = useState<IProduct | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/Products/${id}`)
-            .then((response) => setProduct(response.data))
+        id && agent.Product.customProduct(parseInt(id))
+            .then(product => setProduct(product))
             .catch(error => console.log(error))
             .finally(() => setLoading(false))
-    }, [])
+    }, [id])
     if (loading) return (<Typography variant="h5">منتظر بمانید</Typography>)
     if (!product) return (<Typography variant="h5">هیچ محصولی یافت نشد</Typography>)
     return (

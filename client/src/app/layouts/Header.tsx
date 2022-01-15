@@ -60,7 +60,7 @@ const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
                                 </ListItem>))}
                         </List>
                     </Grid>
-                    {/* <Grid item xs={12} md display="flex" alignItems="center" justifyContent="end">
+                    <Grid item xs={12} md display="flex" alignItems="center" justifyContent="end">
                         <IconButton size='large' className={classes.iconButton} sx={{ color: "inherit" }}>
                             <Badge badgeContent="4" color='secondary' >
                                 <ShoppingCart />
@@ -76,7 +76,7 @@ const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
                                     {title}
                                 </ListItem>))}
                         </List>
-                    </Grid> */}
+                    </Grid>
                 </Grid>
             </Toolbar>
         </AppBar >

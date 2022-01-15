@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material';
 import IProduct from '../../app/models/product';
 import ProductCard from './ProductCard';
+import agent from '../../app/api/agent';
 const Catalog = () => {
     const [products, setProducts] = useState<IProduct[]>([]);
     useEffect(() => {
-        fetch("http://localhost:5000/api/products")
-            .then((response) => response.json())
-            .then((data) => setProducts(data));
+        agent.Product.allProducts().then(products => setProducts(products))
     }, []);
     return (
         <Grid container spacing={2} my={3}>
