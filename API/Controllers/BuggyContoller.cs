@@ -26,9 +26,10 @@ namespace API.Controllers
             return ValidationProblem();
         }
         [HttpGet("server-error")]
-        public ActionResult GetServerError()
+        public ProblemDetails GetServerError()
         {
-            throw new Exception("این خطای سمت سرور است");
+            return new ProblemDetails { Title = "ServerError", Status = 500 };
+            // return new Exception("این خطای سمت سرور است");
         }
     }
 }

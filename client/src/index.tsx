@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './app/layouts/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import './app/layouts/styles.css';
-
+export const history = createBrowserHistory();
 ReactDOM.render(
   <React.StrictMode>
     <Router>

@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
 import IProduct from '../../app/models/product'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import agent from '../../app/api/agent'
 
 const ProductDetail = () => {
     const { id } = useParams<{ id: string }>()
     const [product, setProduct] = useState<IProduct | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
+    const navigate = useNavigate()
     useEffect(() => {
-        id && agent.Product.customProduct(parseInt(id))
+        id && agent.Product.customProduct("server-error")
             .then(product => setProduct(product))
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                navigate("/server-error", { state: { error } });
+            })
             .finally(() => setLoading(false))
     }, [id])
     if (loading) return (<Typography variant="h5">منتظر بمانید</Typography>)

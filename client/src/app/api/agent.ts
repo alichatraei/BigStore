@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
@@ -8,11 +9,14 @@ axios.interceptors.response.use(response => response, (error: AxiosError) => {
     const { data, status } = error.response!;
     switch (status) {
         case 404:
-            toast.error(data?.title, { theme: "colored" });
+            toast.error(data?.title);
+            break;
+        case 500:
+            console.log(data)
             break;
     }
     // toast.error(error.response?.data)
-    return Promise.reject(error.response);
+    return Promise.reject(error.response?.data);
 })
 const requests = {
     get: (url: string) => axios.get(url).then(responseBody),
@@ -23,7 +27,7 @@ const requests = {
 
 const Product = {
     allProducts: () => requests.get('products'),
-    customProduct: (id: number) => requests.get(`products/${id}`)
+    customProduct: (id: string) => requests.get(`products/${id}`)
 }
 
 const agent = {

@@ -16,6 +16,7 @@ import Catalog from "../../features/Products/Catalog";
 import ProductDetail from "../../features/ProductDetail/ProductDetail";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import ServerErrorComponent from "../../error/ServerErrorComponent";
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -43,7 +44,7 @@ function App() {
   return (
     <ThemeProvider theme={theme2}>
       <ToastContainer autoClose={4000} position={toast.POSITION.TOP_RIGHT} hideProgressBar
-        rtl closeButton={false} />
+        rtl closeButton={false} theme="colored" />
       <CacheProvider value={cacheRtl}>
         <StylesProvider jss={jss}>
           <CssBaseline />
@@ -56,6 +57,7 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/contactus" element={<ContactPage />} />
                 <Route path="/aboutus" element={<AboutPage />} />
+                <Route path="/server-error" element={<ServerErrorComponent />} />
               </Routes>
             </Container>
           </div>

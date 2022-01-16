@@ -23,7 +23,12 @@ namespace API.Controllers
             return await context.Product.ToListAsync();
 
         }
-
+        [HttpGet("server-error")]
+        public ProblemDetails GetServerError()
+        {
+            return new ProblemDetails { Title = "این خطای سمت سرور است", Status = 500 };
+            // return new Exception("این خطای سمت سرور است");
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductEntity>> getProduct(int id)
@@ -34,7 +39,7 @@ namespace API.Controllers
                 return NotFound(new ProblemDetails
                 {
                     Title = "محصولی یافت نشد",
-                    Status = 400
+                    Status = 500
                 });
             }
             return product;
