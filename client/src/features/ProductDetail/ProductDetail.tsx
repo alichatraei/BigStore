@@ -3,6 +3,7 @@ import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography
 import IProduct from '../../app/models/product'
 import { useNavigate, useParams } from 'react-router-dom'
 import agent from '../../app/api/agent'
+import NotFoundComponent from '../../error/NotFoundComponent'
 
 const ProductDetail = () => {
     const { id } = useParams<{ id: string }>()
@@ -10,16 +11,13 @@ const ProductDetail = () => {
     const [loading, setLoading] = useState<boolean>(true)
     const navigate = useNavigate()
     useEffect(() => {
-        id && agent.Product.customProduct("server-error")
+        id && agent.Product.customProduct(parseInt(id))
             .then(product => setProduct(product))
-            .catch(error => {
-                console.log(error);
-                navigate("/server-error", { state: { error } });
-            })
+            .catch()
             .finally(() => setLoading(false))
     }, [id])
     if (loading) return (<Typography variant="h5">منتظر بمانید</Typography>)
-    if (!product) return (<Typography variant="h5">هیچ محصولی یافت نشد</Typography>)
+    if (!product) return (<NotFoundComponent />)
     return (
         <Grid container spacing={5} my={3}>
             <Grid item xs={12} md>

@@ -27,7 +27,7 @@ const requests = {
 
 const Product = {
     allProducts: () => requests.get('products'),
-    customProduct: (id: string) => requests.get(`products/${id}`)
+    customProduct: (id: number) => requests.get(`products/${id}`)
 }
 
 const agent = {

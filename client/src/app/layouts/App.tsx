@@ -17,6 +17,7 @@ import ProductDetail from "../../features/ProductDetail/ProductDetail";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ServerErrorComponent from "../../error/ServerErrorComponent";
+import NotFoundComponent from "../../error/NotFoundComponent";
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -51,13 +52,13 @@ function App() {
           <div className="App">
             <Header darkMode={darkMode} changeDarkMode={changeDarkMode} />
             <Container>
-              <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
+              <Routes >
                 <Route path="/" element={<Catalog />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/contactus" element={<ContactPage />} />
                 <Route path="/aboutus" element={<AboutPage />} />
                 <Route path="/server-error" element={<ServerErrorComponent />} />
+                <Route path="*" element={<NotFoundComponent />} />
               </Routes>
             </Container>
           </div>
