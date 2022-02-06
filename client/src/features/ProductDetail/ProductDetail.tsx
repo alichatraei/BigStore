@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material'
+import { Grid, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
 import IProduct from '../../app/models/product'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import agent from '../../app/api/agent'
 import NotFoundComponent from '../../error/NotFoundComponent'
+import LoadingComponents from '../../app/layouts/LoadingComponents'
 
 const ProductDetail = () => {
     const { id } = useParams<{ id: string }>()
     const [product, setProduct] = useState<IProduct | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-    const navigate = useNavigate()
     useEffect(() => {
         id && agent.Product.customProduct(parseInt(id))
             .then(product => setProduct(product))
             .catch()
             .finally(() => setLoading(false))
     }, [id])
-    if (loading) return (<Typography variant="h5">منتظر بمانید</Typography>)
+    if (loading) return (<LoadingComponents message='در حال بارگذاری محصول...' />)
     if (!product) return (<NotFoundComponent />)
     return (
         <Grid container spacing={5} my={3}>
