@@ -18,6 +18,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ServerErrorComponent from "../../error/ServerErrorComponent";
 import NotFoundComponent from "../../error/NotFoundComponent";
+import BasketPage from "../../features/BasketPage/BasketPage";
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/contactus" element={<ContactPage />} />
                 <Route path="/aboutus" element={<AboutPage />} />
                 <Route path="/server-error" element={<ServerErrorComponent />} />
+                <Route path="/basket" element={<BasketPage />} />
                 <Route path="*" element={<NotFoundComponent />} />
               </Routes>
             </Container>
