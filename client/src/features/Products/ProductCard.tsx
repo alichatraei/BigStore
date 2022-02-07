@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
 import IProduct from '../../app/models/product'
 import { Link } from 'react-router-dom'
+import agent from '../../app/api/agent'
+import { LoadingButton } from '@mui/lab'
 interface IProps {
     productItem: IProduct
 }
 const ProductCard = ({ productItem }: IProps) => {
+    const [loading, setLoading] = useState<boolean>(false)
+    const handleAddItemToBasket = (productId: number) => {
+        setLoading(true);
+        agent.basket.addItemToBasket(productId)
+            .catch(error =>
+                console.log(error)).
+            finally(() => setLoading(false));
+    }
     return (
         <Card sx={{ height: "100%", display: 'flex', flexDirection: 'column', justifyContent: "space-between" }}>
             <CardMedia
@@ -22,7 +32,9 @@ const ProductCard = ({ productItem }: IProps) => {
                 </Typography>
             </CardContent>
             <CardActions dir='ltr'>
-                <Button size="small">اضافه کردن به سبد خرید</Button>
+                <LoadingButton loading={loading} onClick={() => {
+                    handleAddItemToBasket(productItem.id)
+                }} size="small">اضافه کردن به سبد خرید</LoadingButton>
                 <Button component={Link} to={`/product/${productItem.id}`} size="small">مشاهده محصول</Button>
             </CardActions>
         </Card>

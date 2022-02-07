@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500))
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
-
+axios.defaults.withCredentials = true;
 const responseBody = (response: AxiosResponse) => response.data;
 axios.interceptors.response.use(async response => {
     await sleep()
@@ -33,9 +33,14 @@ const Product = {
     allProducts: () => requests.get('products'),
     customProduct: (id: number) => requests.get(`products/${id}`)
 }
-
+const basket = {
+    allItems: () => requests.get('basket'),
+    addItemToBasket: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
+    removeItemFromBasket: (productId: number, quantity = 1) => requests.delete(`basket?productId=${productId}&quantity=${quantity}`)
+}
 const agent = {
-    Product
+    Product,
+    basket
 }
 
 export default agent;
