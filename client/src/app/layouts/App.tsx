@@ -1,5 +1,5 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import theme from '../theme/theme'
 import { create } from 'jss';
 import rtl from 'jss-rtl';
@@ -19,6 +19,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import ServerErrorComponent from "../../error/ServerErrorComponent";
 import NotFoundComponent from "../../error/NotFoundComponent";
 import BasketPage from "../../features/BasketPage/BasketPage";
+import { useStoreContext } from "../../context/StoreContext";
+import getCookie from "../../Helpers/getCookie";
+import agent from "../api/agent";
+import LoadingComponents from "./LoadingComponents";
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -33,6 +37,17 @@ const jss = create({
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { setBasket } = useStoreContext();
+  useEffect(() => {
+    const cookie = getCookie('buyerId')
+    if (cookie) {
+      agent.basket.allItems().then(result =>
+        setBasket(result)).catch(error =>
+          console.log(error)).
+        finally(() => setLoading(false))
+    }
+  }, [setBasket])
   // Change dark mode
   const changeDarkMode = () => {
     setDarkMode(!darkMode);
@@ -43,6 +58,7 @@ function App() {
       mode: darkMode ? 'dark' : 'light'
     }
   })
+  if (loading) return <LoadingComponents message="در حال بارگزاری ..." />
   return (
     <ThemeProvider theme={theme2}>
       <ToastContainer autoClose={4000} position={toast.POSITION.TOP_RIGHT} hideProgressBar
