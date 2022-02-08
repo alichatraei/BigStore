@@ -4,17 +4,10 @@ import agent from '../../app/api/agent';
 import LoadingComponents from '../../app/layouts/LoadingComponents';
 import { basket } from '../../app/models/basket';
 import { Delete } from '@mui/icons-material';
-
+import { useStoreContext } from '../../context/StoreContext'
 const BasketPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
-    const [basket, setBasket] = useState<basket | null>(null);
-    useEffect(() => {
-        agent.basket.allItems().
-            then((result) => setBasket(result))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false))
-    }, [])
-    if (loading) return <LoadingComponents message='لطفا منتظر بمانید...' />
+    const { basket } = useStoreContext()
     if (!basket) return <Typography variant="h3">سبد خرید شما خالی است</Typography>
     return (
         <TableContainer component={Paper} sx={{ margin: "23px 0" }}>
@@ -42,7 +35,7 @@ const BasketPage = () => {
                             <TableCell align="center">{((item.price / 1000) * item.quantity).toFixed(3)}</TableCell>
                             <TableCell align="center">
                                 <IconButton>
-                                    <Delete />
+                                    <Delete color='error' />
                                 </IconButton>
                             </TableCell>
                         </TableRow>

@@ -4,14 +4,17 @@ import IProduct from '../../app/models/product'
 import { Link } from 'react-router-dom'
 import agent from '../../app/api/agent'
 import { LoadingButton } from '@mui/lab'
+import { useStoreContext } from '../../context/StoreContext'
 interface IProps {
     productItem: IProduct
 }
 const ProductCard = ({ productItem }: IProps) => {
     const [loading, setLoading] = useState<boolean>(false)
+    const { setBasket } = useStoreContext()
     const handleAddItemToBasket = (productId: number) => {
         setLoading(true);
-        agent.basket.addItemToBasket(productId)
+        agent.basket.addItemToBasket(productId).then(basket =>
+            setBasket(basket))
             .catch(error =>
                 console.log(error)).
             finally(() => setLoading(false));

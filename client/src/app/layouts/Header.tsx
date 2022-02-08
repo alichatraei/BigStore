@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { useNavigate } from 'react-router-dom'
 import { ShoppingCart } from '@mui/icons-material';
-
+import { useStoreContext } from '../../context/StoreContext'
 interface IProps {
     darkMode: boolean;
     changeDarkMode: () => void;
@@ -33,8 +33,10 @@ const styles = {
     }
 }
 const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
-    const classes = useStyles()
+    const classes = useStyles();
     const navigate = useNavigate();
+    const { basket } = useStoreContext()
+    const itemCounts = basket?.items.reduce((sum, item) => sum += item.quantity, 0)
     return (
         <AppBar position='static'>
             <Toolbar>
@@ -65,7 +67,7 @@ const Header: React.FC<IProps> = ({ darkMode, changeDarkMode }) => {
                     <Grid item xs={12} md display="flex" alignItems="center" justifyContent="end">
                         <IconButton size='large' className={classes.iconButton} sx={{ color: "inherit" }}
                             onClick={() => navigate('/basket')}>
-                            <Badge badgeContent="4" color='secondary' >
+                            <Badge badgeContent={itemCounts} color='secondary' >
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>
