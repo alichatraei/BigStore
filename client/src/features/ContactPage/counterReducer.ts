@@ -12,5 +12,18 @@ const initialState: ICounterReducer = {
   title: "ردیوسر پروژه را در اینجا استفاده کردم"
 }
 export default function counterReducer(state = initialState, action: any) {
-  return state
+  switch (action.type) {
+    case INCREMENT_COUNTER:
+      return {
+        ...state,
+        counter: state.counter + 1
+      }
+    case DECREMENT_COUNTER:
+      return {
+        ...state,
+        counter: state.counter - 1
+      }
+    default:
+      return state
+  }
 }
