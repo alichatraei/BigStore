@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import agent from '../../app/api/agent';
 import { Add, Delete, Remove } from '@mui/icons-material';
 import { useStoreContext } from '../../context/StoreContext'
 import { LoadingButton } from '@mui/lab';
 import currencyFormatter from '../../Helpers/currencyFormatter';
 import BasketSummary from './BasketSummary';
+import { Link } from 'react-router-dom';
 const BasketPage = () => {
     const [status, setStatus] = useState<{
         loading: boolean,
@@ -86,7 +87,8 @@ const BasketPage = () => {
             </TableContainer>
             <Grid container mt={3}>
                 <Grid item xs={0} sm={6} md={8}></Grid>
-                <Grid item xs={12} sm={6} md={4}><BasketSummary /></Grid>
+                <Grid item xs={12} sm={6} md={4}><BasketSummary />
+                    <Button component={Link} to="/checkout">پرداخت نهایی</Button></Grid>
             </Grid>
         </>)
 };

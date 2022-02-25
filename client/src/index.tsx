@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './app/layouts/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
 import './app/layouts/styles.css';
 import { StoreProvider } from './context/StoreContext';
-export const history = createBrowserHistory();
+import { storeConfigure } from './app/store/storeConfigure';
+import { Provider } from 'react-redux';
+const store = storeConfigure()
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <StoreProvider>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </StoreProvider>
     </Router>
   </React.StrictMode>,
