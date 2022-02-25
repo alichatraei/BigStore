@@ -88,7 +88,7 @@ const ProductDetail = () => {
                             onClick={handleUpdateButton}
                             loading={updateIndicator}
                             variant="contained"
-                            disabled={item?.quantity === quantity || !item && quantity === 0}
+                            disabled={(item?.quantity === quantity) || (!item && quantity === 0)}
                             fullWidth
                             sx={{ padding: '8px' }}>
                             {item ? "بروز کردن سبد خرید" : "اضافه کردن به سبد خرید"}

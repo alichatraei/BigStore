@@ -45,8 +45,8 @@ function App() {
     if (cookie) {
       agent.basket.allItems().then(result =>
         setBasket(result)).catch(error =>
-          console.log(error)).
-        finally(() => setLoading(false))
+          console.log(error))
+        .finally(() => setLoading(false))
     }
   }, [setBasket])
   // Change dark mode

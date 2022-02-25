@@ -16,8 +16,8 @@ const ProductCard = ({ productItem }: IProps) => {
         agent.basket.addItemToBasket(productId).then(basket =>
             setBasket(basket))
             .catch(error =>
-                console.log(error)).
-            finally(() => setLoading(false));
+                console.log(error))
+            .finally(() => setLoading(false));
     }
     return (
         <Card sx={{ height: "100%", display: 'flex', flexDirection: 'column', justifyContent: "space-between" }}>
